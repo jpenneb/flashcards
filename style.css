@@ -1,0 +1,55 @@
+/* Import the Roboto font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+html, body {
+    height: 100%; /* Full height */
+    margin: 0; /* No margin */
+    display: flex; /* Enable flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    font-family: 'Roboto', sans-serif; /* Use Roboto font */
+}
+
+.flashcard {
+    width: 300px;
+    height: 200px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border-radius: 10px; /* Rounded corners */
+    background-color: #fff; /* Background color */
+    position: relative; /* For absolute positioning of children */
+}
+
+.term {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.definition {
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.button-container {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+#showTermButton, #nextButton {
+    margin: 0 5px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#nextButton:hover {
+    background-color: #0056b3;
+}
