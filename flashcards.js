@@ -1,4 +1,4 @@
-const csvFilePath = 'flashcards.csv' //"/Users/jarrettpennebacker/Library/Mobile Documents/com~apple~CloudDocs/Documents/Personal/GRE/terms.csv"; // Filename of your CSV file
+const csvFilePath = 'flashcards.csv' // Filename of your CSV file
 
 async function fetchCsv(filePath) {
     const response = await fetch(filePath);
