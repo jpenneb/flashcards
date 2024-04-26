@@ -1,4 +1,5 @@
-const csvFilePath = 'flashcards.csv' // Filename of your CSV file
+//const csvFilePath = 'flashcards.csv'
+const csvFilePath = 'need_to_study_most.csv'
 
 async function fetchCsv(filePath) {
     const response = await fetch(filePath);
@@ -58,22 +59,41 @@ function displayFlashcard(flashcard) {
 
 async function initFlashcards() {
     const csvText = await fetchCsv(csvFilePath);
+    console.log(csvText)
     const flashcards = parseCsv(csvText);
     shuffleArray(flashcards); // Shuffle the flashcards
     let currentIndex = 0;
 
     displayFlashcard(flashcards[currentIndex]);
 
-    document.getElementById('nextButton').addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % flashcards.length;
-        displayFlashcard(flashcards[currentIndex]);
-    });
+    const correctButton = document.getElementById('correctButton');
+    const incorrectButton = document.getElementById('incorrectButton');
+
+    if (correctButton) {
+        correctButton.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % flashcards.length;
+            displayFlashcard(flashcards[currentIndex]);
+        });
+    }
+
+    if (incorrectButton) {
+        incorrectButton.addEventListener('click', () => {
+            updateIncorrectCount(flashcards[currentIndex].term);
+            currentIndex = (currentIndex + 1) % flashcards.length;
+            displayFlashcard(flashcards[currentIndex]);
+        });
+    }
+}
+
+function updateIncorrectCount(term) {
+    let incorrectCounts = JSON.parse(localStorage.getItem('incorrectCounts')) || {};
+    incorrectCounts[term] = (incorrectCounts[term] || 0) + 1;
+    localStorage.setItem('incorrectCounts', JSON.stringify(incorrectCounts));
 }
 
 // Add event listener for the Show Term button
 document.getElementById('showTermButton').addEventListener('click', () => {
     document.getElementById('term').style.display = 'block'; // Show the term
 });
-
 
 initFlashcards();
